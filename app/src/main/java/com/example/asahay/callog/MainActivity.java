@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     String firstNumber = "";
     TextView textView;
     Double result=0.0;
+    String operator="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,30 +78,79 @@ public class MainActivity extends AppCompatActivity {
         firstNumber = firstNumber+"9";
         textView.setText(firstNumber);
     }
-    public void onClickPlus(View view)
+    public  void onClickPlus(View view)
     {
         textView = findViewById(R.id.outputTextView);
-        firstNumber=firstNumber+"+";
-        textView.setText(firstNumber);
+        String str = textView.getText().toString();
+        Integer i = str.length();
+        operator="+";
+        String[] stringArray = str.split("[+]");
+        if(stringArray.length==2)
+        {
+            calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
+            textView.setText(result.toString());
+        }
+        else if(stringArray.length==1)
+        {
+            firstNumber = firstNumber +"+";
+            textView.setText(firstNumber);
+        }
+        else
+        {
+            Toast.makeText(this, "Only two numbers at a time", Toast.LENGTH_SHORT).show();
+        }
 
     }
     public void onClickMultiply(View view)
     {
         textView = findViewById(R.id.outputTextView);
-        firstNumber = firstNumber+"3";
-        textView.setText(firstNumber);
+        String str = textView.getText().toString();
+        Integer i = str.length();
+        operator="×";
+        String[] stringArray = str.split("[×]");
+        if(stringArray.length==2)
+        {
+            calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
+            textView.setText(result.toString());
+        }
+        else if(stringArray.length==1)
+        {
+            firstNumber = firstNumber +"×";
+            textView.setText(firstNumber);
+        }
+        else
+        {
+            Toast.makeText(this, "Only two numbers at a time", Toast.LENGTH_SHORT).show();
+        }
     }
     public void onClickDivide(View view)
     {
         textView = findViewById(R.id.outputTextView);
-        firstNumber= firstNumber+"3";
-        textView.setText(firstNumber);
+        String str = textView.getText().toString();
+        Integer i = str.length();
+        operator="÷";
+        String[] stringArray = str.split("[÷]");
+        if(stringArray.length==2)
+        {
+            calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
+            textView.setText(result.toString());
+        }
+        else if(stringArray.length==1)
+        {
+            firstNumber = firstNumber +"÷";
+            textView.setText(firstNumber);
+        }
+        else
+        {
+            Toast.makeText(this, "Only two numbers at a time", Toast.LENGTH_SHORT).show();
+        }
     }
     public void onClickDel(View view)
     {
         textView = findViewById(R.id.outputTextView);
         firstNumber="";
-        textView.setText(firstNumber);
+        result=0.0;
+        textView.setText(result.toString());
     }
     public void onClickDot(View view)
     {
@@ -110,24 +161,51 @@ public class MainActivity extends AppCompatActivity {
     public void onClickMinus(View view)
     {
         textView = findViewById(R.id.outputTextView);
-        textView.setText("-");
+        String str = textView.getText().toString();
+        Integer i = str.length();
+        operator="-";
+        String[] stringArray = str.split("[-]");
+        if(stringArray.length==2)
+        {
+            calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
+            textView.setText(result.toString());
+        }
+        else if(stringArray.length==1)
+        {
+            firstNumber = firstNumber +"-";
+            textView.setText(firstNumber);
+        }
+        else
+        {
+            Toast.makeText(this, "Only two numbers at a time", Toast.LENGTH_SHORT).show();
+        }
     }
     public void onClickEquals(View view)
     {
         TextView textView = findViewById(R.id.outputTextView);
         String str = textView.getText().toString();
-        if(str.matches("[0-9]+[+][0-9]+"))
-        {
-            Log.i("Inside","the regex");
-            String[] additionString = str.split("[+]");
-            Log.i("This"+additionString[0],"And this"+additionString[1]);
-            result=(Double.parseDouble(additionString[0])+Double.parseDouble(additionString[1]));
-            Log.i("the result"+result,"i guess you got it");
-        }
-        else
-        {
-            Log.i("false","it doesn't works");
-        }
+        String[] stringArray = str.split(operator);
+        calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
         textView.setText(result.toString());
+    }
+
+    public void calculatingValue(Double i, Double j,String s)
+    {
+
+        switch (s)
+        {
+            case "+":
+                result=i+j;
+                break;
+            case "-":
+                result=i-j;
+                break;
+            case "×":
+                result=i*j;
+                break;
+            case "÷":
+                result=i/j;
+                break;
+        }
     }
 }
