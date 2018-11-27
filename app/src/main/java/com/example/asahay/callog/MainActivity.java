@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         {
             calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
             textView.setText(result.toString());
+            firstNumber=result.toString();
         }
         else if(stringArray.length==1)
         {
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         {
             calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
             textView.setText(result.toString());
+            firstNumber=result.toString();
         }
         else if(stringArray.length==1)
         {
@@ -134,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         {
             calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
             textView.setText(result.toString());
+            firstNumber=result.toString();
         }
         else if(stringArray.length==1)
         {
@@ -162,13 +165,13 @@ public class MainActivity extends AppCompatActivity {
     {
         textView = findViewById(R.id.outputTextView);
         String str = textView.getText().toString();
-        Integer i = str.length();
         operator="-";
         String[] stringArray = str.split("[-]");
         if(stringArray.length==2)
         {
             calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
             textView.setText(result.toString());
+            firstNumber=result.toString();
         }
         else if(stringArray.length==1)
         {
@@ -184,9 +187,25 @@ public class MainActivity extends AppCompatActivity {
     {
         TextView textView = findViewById(R.id.outputTextView);
         String str = textView.getText().toString();
-        String[] stringArray = str.split(operator);
+        String[] stringArray = new String[2];
+        switch (operator)
+        {
+            case "+":
+                stringArray = str.split("[+]");
+                break;
+            case "-":
+                stringArray = str.split("[-]");
+                break;
+            case "×":
+                stringArray = str.split("[×]");
+                break;
+            case "÷":
+                stringArray = str.split("[÷]");
+                break;
+        }
         calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
         textView.setText(result.toString());
+        firstNumber=result.toString();
     }
 
     public void calculatingValue(Double i, Double j,String s)
