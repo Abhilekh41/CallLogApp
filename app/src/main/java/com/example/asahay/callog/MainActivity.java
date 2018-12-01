@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.outputTextView);
         firstNumber="";
         result=0.0;
-        textView.setText(result.toString());
+        textView.setText(firstNumber.toString());
     }
     public void onClickDot(View view)
     {
