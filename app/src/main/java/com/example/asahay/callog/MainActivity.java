@@ -188,24 +188,39 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.outputTextView);
         String str = textView.getText().toString();
         String[] stringArray = new String[2];
-        switch (operator)
+        if (str.contains("+") || str.contains("-") || str.contains("×") || str.contains("÷]"))
         {
-            case "+":
-                stringArray = str.split("[+]");
-                break;
-            case "-":
-                stringArray = str.split("[-]");
-                break;
-            case "×":
-                stringArray = str.split("[×]");
-                break;
-            case "÷":
-                stringArray = str.split("[÷]");
-                break;
+            switch (operator)
+            {
+                case "+":
+                    stringArray = str.split("[+]");
+                    break;
+                case "-":
+                    stringArray = str.split("[-]");
+                    break;
+                case "×":
+                    stringArray = str.split("[×]");
+                    break;
+                case "÷":
+                    stringArray = str.split("[÷]");
+                    break;
+
+            }
+            if(stringArray.length==1)
+            {
+                textView.setText(str);
+            }
+            else
+            {
+                calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
+                textView.setText(result.toString());
+                firstNumber=result.toString();
+            }
         }
-        calculatingValue(Double.parseDouble(stringArray[0]),Double.parseDouble(stringArray[1]),operator);
-        textView.setText(result.toString());
-        firstNumber=result.toString();
+        else
+        {
+            textView.setText(str);
+        }
     }
 
     public void calculatingValue(Double i, Double j,String s)
