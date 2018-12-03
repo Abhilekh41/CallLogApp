@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
         {
             textView.setText(str);
         }
+        else if(str.contains("+") || str.contains("-") || str.contains("×") || str.contains("÷"))
+        {
+            textView.setText(str);
+        }
         else
         {
             if(str.endsWith("+"))
@@ -125,6 +129,10 @@ public class MainActivity extends AppCompatActivity {
         {
             textView.setText(str);
         }
+        else if(str.contains("+") || str.contains("-") || str.contains("×") || str.contains("÷"))
+        {
+            textView.setText(str);
+        }
         else
         {
             if(str.endsWith("×"))
@@ -158,6 +166,10 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.outputTextView);
         String str = textView.getText().toString();
         if (str.isEmpty())
+        {
+            textView.setText(str);
+        }
+        else if(str.contains("+") || str.contains("-") || str.contains("×") || str.contains("÷"))
         {
             textView.setText(str);
         }
@@ -223,6 +235,10 @@ public class MainActivity extends AppCompatActivity {
         {
             textView.setText(str);
         }
+        else if(str.contains("+") || str.contains("-") || str.contains("×") || str.contains("÷"))
+        {
+            textView.setText(str);
+        }
        else
         {
             if(str.endsWith("-"))
@@ -256,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.outputTextView);
         String str = textView.getText().toString();
         String[] stringArray = new String[2];
-        if (str.contains("+") || str.contains("-") || str.contains("×") || str.contains("÷]"))
+        if (str.contains("+") || str.contains("-") || str.contains("×") || str.contains("÷"))
         {
             switch (operator)
             {
